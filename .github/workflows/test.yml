@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      matrix: { os: [ubuntu-latest, macOS-latest, windows-latest] }
+      matrix: { os: [ubuntu-26.04, macOS-latest, windows-latest] }
     steps:
       - uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
         with: { egress-policy: audit }
@@ -34,7 +34,7 @@ jobs:
 
   npm-test-bash-versions:
     if: inputs.npm
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix: 
@@ -54,7 +54,7 @@ jobs:
 
   dependency-review:
     if: startsWith('pull_request', github.event_name)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
         with: { egress-policy: audit }
@@ -66,7 +66,7 @@ jobs:
   ossf-scorecard:
     if: github.ref_name == github.event.repository.default_branch
     permissions: { id-token: write, security-events: write }
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: step-security/harden-runner@e14015d583714f6e62063499dc959a02595150a1 # v2.21.1
         with: { egress-policy: audit }
